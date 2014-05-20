@@ -24,12 +24,18 @@ class Main extends CI_Controller
         }
     }
 
+    public function signup()
+    {
+        $this->load->view('login/signup');
+    }
+
     public function login_validation()
     {
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('email', 'Email', 'required|trim|xss_clean|callback_validate_credentials');
         $this->form_validation->set_rules('password', 'Password', 'required|md5');
+        $this->form_validation->set_rules('');
 
         if($this->form_validation->run())
         {
@@ -38,6 +44,26 @@ class Main extends CI_Controller
         else
         {
             $this->load->view('login');
+        }
+    }
+
+    public function signup_validation()
+    {
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[users.email]');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim');
+        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|trim|matches[password]');
+
+        $this->form_validation->set_error_delimiters('<li>', '</li>');
+
+        if ($this->form_validation->run())
+        {
+            echo "pass";
+        }
+        else
+        {
+            $this->load->view('login/signup.php');
         }
     }
 

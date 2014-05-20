@@ -33,6 +33,8 @@
 
     ?>
 
+    <a href="<? echo base_url()."index.php/main/signup"; ?>">Signup</a>
+
 
 </div>
 
