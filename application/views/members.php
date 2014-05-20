@@ -15,7 +15,16 @@
     print_r($this->session->all_userdata());
     echo "</pre>";
 
+    echo "<p>";
+    echo base_url();
+    echo "<br>";
+    echo basename(base_url());
+    echo "<br>";
+    echo "</p>";
+
     ?>
+
+    <a href="<? echo base_url()."index.php/main/logout" ?>">Logout</a>
 
 </div>
 
