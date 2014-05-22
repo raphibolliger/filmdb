@@ -59,7 +59,32 @@ class Main extends CI_Controller
 
         if ($this->form_validation->run())
         {
-            echo "pass";
+            // generate a random key
+            $key = md5(uniqid());
+
+            $this->load->library('email', array('mailtype'=>'html'));
+            $this->load->model('model_users');
+
+            $this->email->from('me@mywebsite.com', "CodeIgniter Tutorial");
+            $this->email->to($this->input->post('email'));
+            $this->email->subject("Confirm your account.");
+
+            $message = "<p>Thank you for signing up!</p>";
+            $message .= "<p><a href='".base_url()."main/register_user/".$key."'>Click here</a> to confirm your account</p>";
+
+            $this->email->message($message);
+
+            if ($this->email->send())
+            {
+                echo "The email has been sent.";
+            }
+            else
+            {
+                echo "could not send the email.";
+            }
+
+            $this->model_users->add_user($key);
+
         }
         else
         {
