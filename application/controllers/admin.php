@@ -12,21 +12,37 @@ class Admin extends CI_Controller
         $this->load->view('admin/start');
     }
 
-    public function update_movies()
+    public function initialize_new_movie_list()
     {
+        $this->load->model('model_admin');
 
-        $this->load->library('table');
-        $test = file(base_url()."filmlist.txt");
-        $test2 = $this->prepareInputFilmTextFile($test);
+        // first delete the movie list table
+        $this->model_admin->delete_movieList_table();
 
-        echo "<pre>";
+        // add all movies from filmlist to the table
+        $movies = $this->prepareInputFilmTextFile(file(base_url()."filmlist.txt"));
+        foreach ($movies as $movie)
+        {
+            if($this->model_admin->add_initial_movieList(array('name' => $movie)))
+            {
+                $dbmessage = "Filmliste erfolgreich neu eingelesen.";
+            }
+            else
+            {
+                $dbmessage = "Fehler: Filmliste konnte nicht neu eingelesen werden.";
+            }
+        }
 
-        echo "</pre>";
+        // set the date to send to the view
+        $data['dbmessage'] = $dbmessage;
 
-        echo $this->table->generate($test2);
+        // load the view;
+        $this->load->view('admin/initialize_new_movie_list', $data);
+    }
 
-
-        $this->load->view('admin/update_movies');
+    public function compare_movies()
+    {
+        $this->load->view('admin/compare_movies');
     }
 
     protected  function prepareInputFilmTextFile($inputTextFile)

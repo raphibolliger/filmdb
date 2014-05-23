@@ -8,7 +8,9 @@
 
 <div id="container">
     <h1>Administrationsbereich</h1>
-    <p><a href="<? echo base_url() ?>index.php/admin/update_movies">Update Movies</a> </p>
+    <h2>Willkommen</h2>
+    <p><a href="<? echo base_url() ?>admin/initialize_new_movie_list">Textdatei mit Filmen einlesen</a> </p>
+    <p><a href="<? echo base_url() ?>admin/compare_movies">Vergleiche Textdatei mit DB</a> </p>
 </div>
 </body>
 </html>

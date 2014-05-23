@@ -7,13 +7,9 @@
 <body>
 
 <div id="container">
-    <h1>Update Movies</h1>
+    <h1>Administrationsbereich</h1>
+    <h2>Movielisten vergleichen</h2>
 
-        <?php
-
-        //echo $movietable;
-
-        ?>
 </div>
 
 </body>
