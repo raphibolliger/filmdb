@@ -89,12 +89,12 @@ class Tmdb
      * @param string apikey
      * @param string language default is english
      */
-    public function  __construct($apikey,$lang='de') {
+    public function  __construct() {
         //Assign Api Key
-        $this->setApikey($apikey);
+        $this->setApikey('ceaeecd0a558ddcda1a6bc63b775bba1');
 
         //Setting Language
-        $this->setLang($lang);
+        $this->setLang('de');
 
         //Get Configuration
         $conf = $this->getConfig();
@@ -288,7 +288,7 @@ class Tmdb
     private function _call($action,$text,$lang=""){
         // # http://api.themoviedb.org/3/movie/11?api_key=XXX
         $lang=(empty($lang))?$this->getLang():$lang;
-        $url= TMDBv3::_API_URL_.$action."?api_key=".$this->getApikey()."&language=".$lang."&".$text;
+        $url= Tmdb::_API_URL_.$action."?api_key=".$this->getApikey()."&language=".$lang."&".$text;
         // echo "<pre>$url</pre>";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
