@@ -40,6 +40,38 @@ class Movie extends CI_Controller
         $this->load->view('template/footer', $data);
     }
 
+
+    public function add($movieId = false)
+    {
+        // first set title and load header
+        $data['title'] = "Add Movie to Database";
+        $this->load->view('template/header', $data);
+
+        //initialize tmdb Object
+        $this->load->library('tmdb');
+
+        if ($movieId != false)
+        {
+            $movieDetails = $this->tmdb->movieDetail($movieId);
+
+            $data['id'] = $movieDetails[id];
+            $data['title'] = $movieDetails[title];
+            $data['vote_average'] = $movieDetails[vote_average];
+            $data['release_date'] = $movieDetails[release_date];
+        }
+        else
+        {
+            $movieDetails = "";
+        }
+
+        $data['movieDetails'] = $movieDetails;
+
+        // finaly load the view with all the data
+        $this->load->view('movie/add', $data);
+        $this->load->view('template/footer', $data);
+    }
+
+
     // serach movies in tmdb
     private function _searchMoviesInTmdb($movieName)
     {
@@ -66,4 +98,7 @@ class Movie extends CI_Controller
 
         return $data;
     }
+
+
+
 }

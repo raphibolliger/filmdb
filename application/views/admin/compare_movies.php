@@ -13,8 +13,6 @@
     <?php echo $allMovies; ?>
     <p>In der nachfolgenden Tabelle sind alle Filme die in der Datenbank gespeichert sind, auf dem NAS aber nicht mehr
     gefunden wurden.</p>
-
-
 </div>
 
 </body>
